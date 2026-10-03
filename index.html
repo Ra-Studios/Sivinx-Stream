@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivinx Stream | Professional Voice Transcription</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & BASE */
+        :root {
+            --bg-color: #000000;
+            --surface-color: #0a0a0a;
+            --border-color: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-tertiary: #444444;
+            --accent: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -0.02em;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-brand img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .nav-brand span {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-btn {
+            background: var(--text-primary);
+            color: var(--bg-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.02);
+            background: #e0e0e0;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4rem;
+            z-index: 10;
+        }
+
+        #wave-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--text-secondary);
+            border-radius: 100px;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 8vw, 7rem);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        /* SCROLL SEQUENCE (HOW IT WORKS) */
+        .sequence-container {
+            position: relative;
+            height: 400vh; /* Creates scrolling space */
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .step-indicator {
+            position: absolute;
+            left: 4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            z-index: 20;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--text-tertiary);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .step-dot.active {
+            border-color: var(--text-primary);
+            background: var(--text-primary);
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .step-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+            transition: color 0.5s ease;
+        }
+
+        .step-dot.active::after {
+            color: var(--text-primary);
+        }
+
+        /* Interactive Display Frame */
+        .display-frame {
+            width: 60vw;
+            height: 60vh;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 20px 100px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transform-origin: center;
+            transition: transform 0.1s ease;
+        }
+
+        .frame-header {
+            height: 40px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 8px;
+        }
+
+        .frame-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+        }
+
+        .frame-body {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-layer {
+            position: absolute;
+            inset: 0;
+            padding: 3rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-layer.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Layer 1: Setup */
+        .layer-setup h2 { font-size: 3rem; margin-bottom: 1rem; }
+        .layer-setup p { font-size: 1.2rem; color: var(--text-secondary); max-width: 400px; }
+        .key-combo {
+            display: inline-flex;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+        .key {
+            padding: 1rem 2rem;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 0 #000;
+        }
+
+        /* Layer 2: Listening */
+        .layer-listening { align-items: center; text-align: center; }
+        .equalizer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 80px;
+            margin-bottom: 2rem;
+        }
+        .equalizer-bar {
+            width: 8px;
+            background: #ff3333;
+            border-radius: 4px;
+            animation: eq-bounce 1s ease-in-out infinite alternate;
+        }
+        .equalizer-bar:nth-child(1) { height: 20px; animation-delay: 0.1s; }
+        .equalizer-bar:nth-child(2) { height: 50px; animation-delay: 0.4s; }
+        .equalizer-bar:nth-child(3) { height: 80px; animation-delay: 0.2s; }
+        .equalizer-bar:nth-child(4) { height: 40px; animation-delay: 0.5s; }
+        .equalizer-bar:nth-child(5) { height: 60px; animation-delay: 0.3s; }
+        .equalizer-bar:nth-child(6) { height: 30px; animation-delay: 0.6s; }
+        .equalizer-bar:nth-child(7) { height: 70px; animation-delay: 0.1s; }
+        
+        @keyframes eq-bounce {
+            0% { transform: scaleY(0.3); background: #990000; }
+            100% { transform: scaleY(1); background: #ff3333; box-shadow: 0 0 20px rgba(255, 51, 51, 0.8); }
+        }
+        .layer-listening h2 { font-size: 2.5rem; }
+
+        /* Layer 3: Output */
+        .layer-output { justify-content: flex-start; }
+        .typewriter-text {
+            font-size: 2rem;
+            line-height: 1.4;
+            color: var(--text-primary);
+            border-left: 3px solid var(--text-secondary);
+            padding-left: 1.5rem;
+            min-height: 100px;
+        }
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 2rem;
+            background: var(--text-primary);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* GRID FEATURES SECTION */
+        .grid-section {
+            padding: 10rem 4rem;
+            background: var(--bg-color);
+            position: relative;
+        }
+
+        .grid-header {
+            margin-bottom: 6rem;
+        }
+
+        .grid-header h2 {
+            font-size: 4rem;
+            text-transform: uppercase;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bento-item {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .bento-item:hover {
+            border-color: #444;
+        }
+
+        .bento-item.large {
+            grid-column: span 2;
+        }
+
+        .bento-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .bento-item p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .bento-pattern {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            opacity: 0.1;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* LONG FORM CONTENT & FAQ */
+        .long-form-section {
+            padding: 8rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+        }
+        .long-form-section h2 { font-size: 3rem; margin-bottom: 2rem; color: #fff; text-transform: uppercase; }
+        .long-form-section h3 { font-size: 1.8rem; margin: 3rem 0 1rem 0; color: #fff; }
+        .long-form-section p, .long-form-section li { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+        .long-form-section ul, .long-form-section ol { padding-left: 2rem; margin-bottom: 2rem; }
+        .long-form-section li { margin-bottom: 0.5rem; }
+        
+        .faq-section {
+            padding: 8rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+        }
+        .faq-section h2 { font-size: 3rem; margin-bottom: 3rem; text-transform: uppercase; }
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            cursor: pointer;
+        }
+        .faq-question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 800px;
+            margin-top: 1.5rem;
+        }
+        .faq-toggle-icon {
+            font-size: 2rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            color: var(--text-tertiary);
+        }
+        .faq-item.open .faq-toggle-icon {
+            transform: rotate(45deg);
+            color: #fff;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 10rem 4rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: radial-gradient(circle at 50% 100%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,1) 50%);
+        }
+
+        .cta-section h2 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-massive {
+            display: inline-block;
+            background: var(--text-primary);
+            color: var(--bg-color);
+            font-size: 1.5rem;
+            font-weight: 800;
+            padding: 1.5rem 4rem;
+            border-radius: 4px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-massive::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-massive:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.2);
+            background: #ffffff;
+        }
+
+        .btn-massive:hover::after {
+            left: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-item.large { grid-column: span 1; }
+            .display-frame { width: 90vw; }
+            .step-indicator { display: none; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav { padding: 1.5rem 2rem; }
+            .hero, .grid-section, .cta-section { padding: 4rem 2rem; }
+        }
+    
+        
+        
+        
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-brand">
+            <!-- Ensure logo.png is in the same folder -->
+            <img src="logo.png" alt="Sivinx Logo" onerror="this.style.display='none'">
+            <span>SIVINX STREAM</span>
+        </div>
+        <div class="nav-links">
+            <a href="#how-to-use" class="nav-link">Guide</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#legal" class="nav-link">Privacy</a>
+        </div>
+        <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe" class="nav-btn">Download</a>
+    </nav>
+
+    <!-- HERO WITH CANVAS BACKGROUND -->
+    <section class="hero">
+        <canvas id="wave-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">Zero Friction Audio Interface</div>
+            <h1>Transcribe at<br>the Speed of<br>Thought.</h1>
+            <p>A native, ultra-minimalist desktop application. Press your hotkey anywhere on your system and speak. Sivinx Stream types it instantly.</p>
+        </div>
+    </section>
+
+    
+    
+    <!-- VIDEO DEMONSTRATION SECTION -->
+    <section class="video-section" id="interactive-demo">
+        <div class="video-container">
+            <h2>See Sivinx Stream in Action</h2>
+            <div class="video-wrapper">
+                <!-- Replace 'your_video.mp4' with the actual path to your video file -->
+                <video id="sivinx-demo-video" controls autoplay muted loop playsinline>
+                    <source src="video_compressed.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .video-section {
+            padding: 8rem 4rem;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .video-container h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+        .video-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.1);
+            background: #000;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+    
+    <!-- SCROLL DRIVEN SEQUENCE -->
+    <section class="sequence-container" id="how-it-works">
+        <div class="sticky-wrapper">
+            
+            <div class="step-indicator">
+                <div class="step-dot active" data-label="TRIGGER" id="dot-1"></div>
+                <div class="step-dot" data-label="CAPTURE" id="dot-2"></div>
+                <div class="step-dot" data-label="OUTPUT" id="dot-3"></div>
+            </div>
+
+            <div class="display-frame" id="display-frame">
+                <div class="frame-header">
+                    <div class="frame-dot"></div>
+                    <div class="frame-dot"></div>
+                    <div class="frame-dot"></div>
+                </div>
+                <div class="frame-body">
+                    
+                    <!-- Layer 1 -->
+                    <div class="content-layer layer-setup active" id="layer-1">
+                        <p class="mono">Step 01</p>
+                        <h2>Global Hotkey Activation</h2>
+                        <p>No window switching required. Works natively over any application on Windows.</p>
+                        <div class="key-combo">
+                            <div class="key">CTRL</div>
+                            <div class="key">ALT</div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 2 -->
+                    <div class="content-layer layer-listening" id="layer-2">
+                        <div class="equalizer">
+                            <div class="equalizer-bar"></div>
+                            <div class="equalizer-bar"></div>
+                            <div class="equalizer-bar"></div>
+                            <div class="equalizer-bar"></div>
+                            <div class="equalizer-bar"></div>
+                            <div class="equalizer-bar"></div>
+                            <div class="equalizer-bar"></div>
+                        </div>
+                        <h2>Listening...</h2>
+                        <p class="mono">Engine: Deepgram Nova-2 / Gemini Pro</p>
+                    </div>
+
+                    <!-- Layer 3 -->
+                    <div class="content-layer layer-output" id="layer-3">
+                        <p class="mono" style="margin-bottom: 2rem; color: var(--text-secondary)">Target: Microsoft Word / Discord / Browser</p>
+                        <div class="typewriter-text">
+                            <span id="typed-output"></span><span class="cursor"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENTO GRID FEATURES -->
+    <section class="grid-section">
+        <div class="grid-header">
+            <h2>System<br>Architecture</h2>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-item large">
+                <h3>Absolute Privacy. Offline Mode.</h3>
+                <p>Sivinx Stream comes bundled with local Whisper.cpp models. When offline mode is enabled, your audio data never leaves your hardware. Pure, uncompromised privacy.</p>
+                <svg class="bento-pattern" width="200" height="200" viewBox="0 0 100 100"><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/></pattern><rect width="100" height="100" fill="url(#grid)"/></svg>
+            </div>
+            <div class="bento-item">
+                <h3>Native Desktop Integration</h3>
+                <p>Built on Tauri and Rust. Consumes almost zero RAM while idling in your system tray.</p>
+            </div>
+            <div class="bento-item">
+                <h3>Push-to-Talk Logic</h3>
+                <p>Hold the keys to record. Release to stop and type. It perfectly matches human intuition.</p>
+            </div>
+            <div class="bento-item large">
+                <h3>Hyper-Accurate AI Engines</h3>
+                <p>When connected, it leverages Deepgram and Google Gemini models to automatically punctuate, format, and perfectly understand complex terminology without hesitation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPREHENSIVE GUIDE SECTION -->
+    <section class="long-form-section" id="how-to-use">
+        <h2>Complete User Guide</h2>
+        <p>Sivinx Stream was designed with one singular goal: to remove the friction between human thought and digital text. We believe you should not have to context-switch, open a new application, or fumble with complex microphone settings just to transcribe your voice. Here is a comprehensive guide on exactly how to use the software to its maximum potential.</p>
+        
+        <h3>1. Initial Setup & Installation</h3>
+        <p>After downloading the `.exe` installer from our official releases page, simply run the setup wizard. Sivinx Stream installs natively on your Windows machine in seconds. Once installed, it will automatically launch and place a sleek, unobtrusive icon in your System Tray (the bottom right corner of your Windows taskbar, near the clock).</p>
+        
+        <h3>2. The Settings Dashboard</h3>
+        <p>You can right-click the Sivinx Stream icon in your system tray at any time to open the Settings dashboard. This is where you configure the brain of the application. We offer three distinct engines depending on your needs:</p>
+        <ul>
+            <li><strong>Deepgram Nova-2 (Cloud):</strong> The absolute bleeding edge of speed. Recommended for users with an active internet connection who want near-instantaneous transcription with exceptional punctuation and formatting.</li>
+            <li><strong>Google Gemini (Cloud):</strong> The ultimate model for contextual understanding. Gemini excels at transcribing complex, multi-lingual, or highly technical jargon.</li>
+            <li><strong>Whisper.cpp (Offline/Local):</strong> For absolute, uncompromised privacy. This model downloads directly to your hard drive and runs entirely on your local CPU/GPU. No audio data ever leaves your computer. Perfect for sensitive documents, medical records, or working on an airplane with no Wi-Fi.</li>
+        </ul>
+
+        <h3>3. The Push-to-Talk Philosophy</h3>
+        <p>Unlike other transcription software that forces you to click a "Record" button and then click a "Stop" button, Sivinx Stream acts like a walkie-talkie. We use a global hotkey interceptor running at the operating system level.</p>
+        <ol>
+            <li>Click into ANY text field on your computer (a Microsoft Word document, a Discord chat, a web browser search bar, or an email draft).</li>
+            <li>Press and <strong>hold down</strong> `CTRL + ALT` on your keyboard.</li>
+            <li>While holding the keys, speak your thought naturally.</li>
+            <li><strong>Release the keys.</strong></li>
+        </ol>
+        <p>The moment you release the keys, Sivinx Stream instantly processes the audio buffer, queries the selected AI engine, and securely injects the perfectly punctuated text directly into wherever your typing cursor was located. It feels like magic.</p>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="long-form-section" id="about">
+        <h2>About RaStudios</h2>
+        <p>RaStudios is a forward-thinking software collective dedicated to building tools that augment human capability. We look at the modern desktop experience and see unnecessary friction. Why should a user type at 60 words per minute when they can speak at 150?</p>
+        <p>We built Sivinx Stream because we were dissatisfied with the existing solutions on the market. They were either too slow, required a monthly subscription for basic features, or forced you to copy and paste text from a clunky web interface. We wanted something that lived invisibly on the desktop, consumed almost zero RAM, and integrated seamlessly with the operating system.</p>
+        <p>Our philosophy is rooted in minimalism, privacy, and speed. We believe software should get out of your way and let you focus entirely on your ideas.</p>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-question">Do I need an internet connection to use Sivinx Stream? <span class="faq-toggle-icon">+</span></div>
+            <div class="faq-answer">No. While the Deepgram and Gemini engines require an internet connection for cloud processing, Sivinx Stream comes with a fully functional Offline Mode powered by Whisper.cpp. You can transcribe infinitely with zero internet connection.</div>
+        </div>
+        
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-question">Does this work on Mac or Linux? <span class="faq-toggle-icon">+</span></div>
+            <div class="faq-answer">Currently, Sivinx Stream is optimized specifically for Windows architectures (Windows 10 and 11) to ensure the deepest possible integration with the OS input layer. Cross-platform support is currently on our roadmap.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-question">Is there a subscription fee? <span class="faq-toggle-icon">+</span></div>
+            <div class="faq-answer">No. Sivinx Stream operates on a Bring-Your-Own-Key (BYOK) model for cloud services, and the offline local models are 100% free forever. We do not charge recurring subscriptions.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-question">Can I change the CTRL + ALT hotkey? <span class="faq-toggle-icon">+</span></div>
+            <div class="faq-answer">Yes, the hotkey is fully customizable within the Settings dashboard. You can bind it to any key combination that fits your personal workflow.</div>
+        </div>
+    </section>
+
+    <!-- LEGAL & PRIVACY SECTION -->
+    <section class="long-form-section" id="legal">
+        <h2>Privacy Policy</h2>
+        <p>At RaStudios, privacy is not an afterthought; it is a fundamental architectural requirement. Because Sivinx Stream processes human voice recordings, we have structured the application to give you total control over your data.</p>
+        <ul>
+            <li><strong>Local Processing (Offline Mode):</strong> When using the offline Whisper models, your audio data is processed entirely within your computer's RAM. It is never saved to your hard drive, and it is never transmitted over the internet.</li>
+            <li><strong>Cloud Processing:</strong> When utilizing Deepgram or Google Gemini, your audio buffer is securely transmitted to their respective API endpoints via encrypted TLS connections. We do not proxy, store, or log these requests on any RaStudios servers. The transaction is strictly between your machine and the AI provider.</li>
+            <li><strong>Telemetry:</strong> Sivinx Stream does not contain tracking pixels, analytics SDKs, or background telemetry. We do not know when you use the app, how often you use it, or what you say.</li>
+        </ul>
+
+        <h3>Terms and Conditions</h3>
+        <p>By downloading and utilizing Sivinx Stream, you agree to use the software in compliance with all local laws and regulations. RaStudios provides this software "as is" without warranties of any kind, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+        <p>In no event shall RaStudios be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort arising in any way out of the use of this software.</p>
+        <p>Users are responsible for ensuring that their use of third-party APIs (such as Deepgram or Google Gemini) complies with the respective Terms of Service of those providers.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to<br>upgrade your<br>workflow?</h2>
+        <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe" class="btn-massive">Download for Windows</a>
+    </section>
+
+    <footer>
+        <div>&copy; 2026 RaStudios. All rights reserved.</div>
+        <div>System Version 0.1.0</div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- 1. DYNAMIC BACKGROUND WAVEFORM ---
+        const canvas = document.getElementById('wave-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        let time = 0;
+        function drawWave() {
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.lineWidth = 2;
+            
+            // Draw multiple overlapping sine waves to look like audio
+            for(let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                // A very soft, elegant gradient-like opacity
+                ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 + (i * 0.08)})`;
+                
+                for(let x = 0; x < canvas.width; x += 5) {
+                    // Extremely smooth, slow rolling waves
+                    const y = canvas.height / 2 
+                            + Math.sin(x * 0.005 + time + i) * 60 
+                            + Math.sin(x * 0.002 - time * 0.3) * 100 * (i * 0.1 + 0.5);
+                    
+                    if(x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+            // Much slower time increment for professional fluid feel
+            time += 0.003;
+            requestAnimationFrame(drawWave);
+        }
+        drawWave();
+
+
+        // --- 2. SCROLL DRIVEN SEQUENCE ANIMATION ---
+        const sequenceContainer = document.querySelector('.sequence-container');
+        const layers = [
+            document.getElementById('layer-1'),
+            document.getElementById('layer-2'),
+            document.getElementById('layer-3')
+        ];
+        const dots = [
+            document.getElementById('dot-1'),
+            document.getElementById('dot-2'),
+            document.getElementById('dot-3')
+        ];
+        const displayFrame = document.getElementById('display-frame');
+        
+        // Typewriter effect variables
+        const typedOutput = document.getElementById('typed-output');
+        const fullText = " This is a demonstration of Sivinx Stream transcribing audio into text instantly upon releasing the hotkey.";
+        let typeInterval = null;
+
+        function runTypewriter() {
+            if(typeInterval) clearInterval(typeInterval);
+            typedOutput.textContent = "";
+            let i = 0;
+            typeInterval = setInterval(() => {
+                if(i < fullText.length) {
+                    typedOutput.textContent += fullText.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, 30);
+        }
+
+        window.addEventListener('scroll', () => {
+            // Calculate how far down the sequence container we have scrolled
+            const rect = sequenceContainer.getBoundingClientRect();
+            
+            // Scroll progress between 0 and 1
+            let progress = 0;
+            if (rect.top < 0) {
+                progress = Math.abs(rect.top) / (rect.height - window.innerHeight);
+            }
+            if (rect.top > 0) progress = 0;
+            if (rect.bottom < window.innerHeight) progress = 1;
+
+            // Determine which layer should be active based on progress (3 layers)
+            let activeIndex = 0;
+            if (progress > 0.33) activeIndex = 1;
+            if (progress > 0.66) activeIndex = 2;
+
+            // Frame 3D rotation effect based on scroll
+            const rotateX = (progress - 0.5) * 20; // -10deg to 10deg
+            displayFrame.style.transform = `perspective(1000px) rotateX(${rotateX}deg)`;
+
+            // Update UI
+            layers.forEach((layer, index) => {
+                if (index === activeIndex) {
+                    if(!layer.classList.contains('active')) {
+                        layer.classList.add('active');
+                        // Trigger typing effect only when entering layer 3
+                        if(index === 2) {
+                            runTypewriter();
+                        } else {
+                            if(typeInterval) clearInterval(typeInterval);
+                            typedOutput.textContent = "";
+                        }
+                    }
+                } else {
+                    layer.classList.remove('active');
+                }
+            });
+
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        });
+
+        
+    </script>
+</body>
+</html>
