@@ -1,5 +1,7 @@
 # Sivinx-Stream
 
+https://ra-studios.github.io/Sivinx-Stream/
+
 Sivinx Stream is a lightweight, lightning-fast application designed to instantly transcribe your voice anywhere on your computer using advanced AI models.
 
 ## Features
