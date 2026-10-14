@@ -17,6 +17,8 @@
             --text-secondary: #888888;
             --text-tertiary: #444444;
             --accent: #ffffff;
+            --page-gutter: clamp(1rem, 4vw, 4rem);
+            --nav-height: 96px;
         }
 
         * {
@@ -36,6 +38,16 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-height) + 1rem);
+        }
+
+        img, video {
+            max-width: 100%;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--text-primary);
+            outline-offset: 5px;
         }
 
         ::selection {
@@ -63,7 +75,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 4rem;
+            padding: 1.5rem var(--page-gutter);
             z-index: 100;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
             backdrop-filter: blur(10px);
@@ -75,6 +87,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            flex-shrink: 0;
         }
 
         .nav-brand img {
@@ -119,6 +132,11 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: transform 0.2s ease, background-color 0.2s ease;
+            white-space: nowrap;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-btn:hover {
@@ -126,14 +144,33 @@
             background: #e0e0e0;
         }
 
+        .nav-panel { display: contents; }
+        .nav-toggle, .drawer-header, .menu-backdrop { display: none; }
+
+        .menu-button {
+            width: 44px;
+            height: 44px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: var(--surface-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .menu-button svg { width: 22px; height: 22px; }
+
         /* HERO SECTION */
         .hero {
             position: relative;
             min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 4rem;
+            padding: calc(var(--nav-height) + 3rem) var(--page-gutter) 4rem;
             z-index: 10;
         }
 
@@ -142,7 +179,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             z-index: -1;
             opacity: 0.4;
         }
@@ -196,6 +233,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding-top: var(--nav-height);
         }
 
         .step-indicator {
@@ -246,6 +284,7 @@
         .display-frame {
             width: 60vw;
             height: 60vh;
+            min-height: 440px;
             background: var(--surface-color);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -373,7 +412,7 @@
 
         /* GRID FEATURES SECTION */
         .grid-section {
-            padding: 10rem 4rem;
+            padding: 10rem var(--page-gutter);
             background: var(--bg-color);
             position: relative;
         }
@@ -389,7 +428,7 @@
 
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1.5rem;
         }
 
@@ -436,7 +475,7 @@
 
         /* LONG FORM CONTENT & FAQ */
         .long-form-section {
-            padding: 8rem 4rem;
+            padding: 8rem var(--page-gutter);
             max-width: 1000px;
             margin: 0 auto;
             border-top: 1px solid var(--border-color);
@@ -448,7 +487,7 @@
         .long-form-section li { margin-bottom: 0.5rem; }
         
         .faq-section {
-            padding: 8rem 4rem;
+            padding: 8rem var(--page-gutter);
             max-width: 1000px;
             margin: 0 auto;
             border-top: 1px solid var(--border-color);
@@ -465,6 +504,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
         .faq-answer {
             max-height: 0;
@@ -483,6 +523,7 @@
             font-weight: 300;
             transition: transform 0.3s ease;
             color: var(--text-tertiary);
+            flex-shrink: 0;
         }
         .faq-item.open .faq-toggle-icon {
             transform: rotate(45deg);
@@ -491,7 +532,7 @@
 
         /* CTA SECTION */
         .cta-section {
-            padding: 10rem 4rem;
+            padding: 10rem var(--page-gutter);
             text-align: center;
             border-top: 1px solid var(--border-color);
             background: radial-gradient(circle at 50% 100%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,1) 50%);
@@ -516,6 +557,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            max-width: 100%;
         }
 
         .btn-massive::after {
@@ -541,25 +583,159 @@
 
         /* FOOTER */
         footer {
-            padding: 3rem 4rem;
+            padding: 3rem var(--page-gutter);
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             color: var(--text-tertiary);
             font-size: 0.9rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        /* RESPONSIVE */
+        /* VIDEO DEMONSTRATION */
+        .video-section {
+            padding: 8rem var(--page-gutter);
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            min-width: 0;
+            text-align: center;
+        }
+        .video-container h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+        .video-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.1);
+            background: #000;
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* RESPONSIVE: keep navigation in normal flow before it can overlap. */
+        @media (max-width: 1200px) {
+            .nav-links { position: static; transform: none; gap: 1.5rem; }
+            nav { gap: 1.5rem; }
+        }
         @media (max-width: 1024px) {
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-item.large { grid-column: span 1; }
-            .display-frame { width: 90vw; }
+            .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .bento-item { padding: 2rem; }
+            .display-frame { width: calc(100% - 2 * var(--page-gutter)); }
             .step-indicator { display: none; }
         }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            nav { padding: 1.5rem 2rem; }
-            .hero, .grid-section, .cta-section { padding: 4rem 2rem; }
+            :root { --nav-height: 72px; }
+            nav {
+                gap: 1rem;
+                padding: 0.75rem var(--page-gutter);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+            .nav-brand { gap: 0.5rem; }
+            .nav-brand img { width: 30px; height: 30px; }
+            .nav-brand span { font-size: clamp(0.95rem, 3.5vw, 1.1rem); }
+            .nav-toggle { display: inline-flex; }
+            .nav-panel {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: min(360px, calc(100% - 3rem));
+                height: 100vh;
+                height: 100dvh;
+                padding: 1.25rem;
+                padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+                gap: 2rem;
+                background: #0a0a0a;
+                border-left: 1px solid #333;
+                box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+                z-index: 101;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                transform: translateX(100%);
+                visibility: hidden;
+                transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.35s;
+            }
+            .drawer-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+            .drawer-title { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
+            .nav-close { display: inline-flex; }
+            .nav-links { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+            .nav-link { display: flex; align-items: center; min-height: 52px; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); }
+            .nav-btn { margin-top: auto; min-height: 52px; }
+            .menu-backdrop {
+                display: block;
+                position: fixed;
+                inset: 0;
+                z-index: 99;
+                border: 0;
+                background: rgba(0, 0, 0, 0.65);
+                opacity: 0;
+                visibility: hidden;
+                cursor: pointer;
+                transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+            }
+            body.menu-open { overflow: hidden; }
+            .menu-open .nav-panel { transform: translateX(0); visibility: visible; transition-delay: 0s; }
+            .menu-open .menu-backdrop { opacity: 1; visibility: visible; transition-delay: 0s; }
+            .menu-open .nav-toggle { visibility: hidden; }
+            .hero { padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3rem; }
+            .hero h1 { font-size: clamp(2rem, 9.2vw, 4rem); }
+            .hero p { font-size: 1.1rem; }
+            .hero-badge { font-size: 0.65rem; letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+            .grid-section, .cta-section, .video-section, .long-form-section, .faq-section { padding: 4rem var(--page-gutter); }
+            .grid-header { margin-bottom: 2rem; }
+            .grid-header h2, .cta-section h2 { font-size: clamp(2rem, 8vw, 3.5rem); }
+            .video-container h2, .long-form-section h2, .faq-section h2 { font-size: clamp(1.8rem, 6.5vw, 2.75rem); margin-bottom: 2rem; }
+            .bento-grid { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+            .bento-item.large { grid-column: span 1; }
+            .bento-item { padding: 1.5rem; }
+            .bento-item h3, .long-form-section h3 { font-size: 1.5rem; }
+            .bento-item p, .long-form-section p, .long-form-section li, .faq-answer { font-size: 1rem; }
+            .long-form-section ul, .long-form-section ol { padding-left: 1.25rem; }
+            .faq-question { font-size: 1.1rem; line-height: 1.5; }
+            .faq-item { padding: 1.5rem 0; }
+            .btn-massive { width: 100%; padding: 1.25rem 1rem; font-size: clamp(1rem, 3.5vw, 1.3rem); }
+            footer { padding: 2rem var(--page-gutter); flex-direction: column; }
+        }
+
+        /* Read all three steps normally on phones and short landscape screens. */
+        @media (max-width: 768px), (max-height: 600px) {
+            .sequence-container { height: auto; }
+            .sticky-wrapper { position: static; height: auto; padding: 3rem var(--page-gutter); overflow: visible; }
+            .step-indicator { display: none; }
+            .display-frame { width: 100%; max-width: 800px; height: auto; min-height: 0; transform: none; }
+            .frame-header { flex-shrink: 0; }
+            .frame-body { display: block; padding: 0; overflow: visible; }
+            .content-layer { position: relative; inset: auto; padding: 1.5rem; opacity: 1; visibility: visible; transform: none; transition: none; }
+            .content-layer + .content-layer { border-top: 1px solid var(--border-color); }
+            .layer-setup h2, .layer-listening h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+            .layer-setup p, .layer-listening p, .layer-output p { font-size: 1rem; line-height: 1.6; }
+            .key-combo { margin-top: 1.5rem; flex-wrap: wrap; }
+            .key { padding: 0.75rem 1.25rem; font-size: 1rem; }
+            .typewriter-text { font-size: clamp(1.1rem, 4vw, 1.5rem); padding-left: 1rem; min-height: 0; }
+            .cursor { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .equalizer-bar, .cursor { animation: none; }
+            .nav-panel, .menu-backdrop { transition: none; }
         }
     
         
@@ -569,19 +745,31 @@
 </head>
 <body>
 
-    <nav>
+    <button class="menu-backdrop" type="button" aria-label="Close navigation" tabindex="-1"></button>
+    <nav aria-label="Main navigation">
         <div class="nav-brand">
             <!-- Ensure logo.png is in the same folder -->
             <img src="logo.png" alt="Sivinx Logo" onerror="this.style.display='none'">
             <span>SIVINX STREAM</span>
         </div>
-        <div class="nav-links">
-            <a href="#how-to-use" class="nav-link">Guide</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#faq" class="nav-link">FAQ</a>
-            <a href="#legal" class="nav-link">Privacy</a>
+        <button class="menu-button nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div class="nav-panel" id="mobile-menu">
+            <div class="drawer-header">
+                <span class="drawer-title">SIVINX STREAM</span>
+                <button class="menu-button nav-close" type="button" aria-label="Close navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                </button>
+            </div>
+            <div class="nav-links">
+                <a href="#how-to-use" class="nav-link">Guide</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#legal" class="nav-link">Privacy</a>
+            </div>
+            <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe" class="nav-btn">Download</a>
         </div>
-        <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe" class="nav-btn">Download</a>
     </nav>
 
     <!-- HERO WITH CANVAS BACKGROUND -->
@@ -609,39 +797,6 @@
             </div>
         </div>
     </section>
-    
-    <style>
-        .video-section {
-            padding: 8rem 4rem;
-            background: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .video-container {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-        .video-container h2 {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            color: var(--text-primary);
-        }
-        .video-wrapper {
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 30px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.1);
-            background: #000;
-        }
-        .video-wrapper video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-    </style>
     
     <!-- SCROLL DRIVEN SEQUENCE -->
     <section class="sequence-container" id="how-it-works">
@@ -815,13 +970,58 @@
 
     <!-- SCRIPTS -->
     <script>
+        // Mobile drawer: keyboard focus stays inside until the menu closes.
+        const mobileNavigation = window.matchMedia('(max-width: 768px)');
+        const menuToggle = document.querySelector('.nav-toggle');
+        const menuPanel = document.querySelector('.nav-panel');
+        const menuClose = document.querySelector('.nav-close');
+        const menuBackdrop = document.querySelector('.menu-backdrop');
+        const pageSections = document.querySelectorAll('body > section, body > footer');
+
+        function setMenuOpen(open, restoreFocus = true) {
+            open = open && mobileNavigation.matches;
+            document.body.classList.toggle('menu-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuPanel.inert = mobileNavigation.matches && !open;
+            pageSections.forEach(section => { section.inert = open; });
+            if (open) menuClose.focus({ preventScroll: true });
+            else if (restoreFocus && mobileNavigation.matches) menuToggle.focus({ preventScroll: true });
+        }
+
+        menuToggle.addEventListener('click', () => setMenuOpen(true));
+        menuClose.addEventListener('click', () => setMenuOpen(false));
+        menuBackdrop.addEventListener('click', () => setMenuOpen(false));
+        menuPanel.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMenuOpen(false));
+        });
+        document.addEventListener('keydown', event => {
+            if (!document.body.classList.contains('menu-open')) return;
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                setMenuOpen(false);
+            } else if (event.key === 'Tab') {
+                const controls = [...menuPanel.querySelectorAll('button, a[href]')];
+                const first = controls[0];
+                const last = controls[controls.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+        mobileNavigation.addEventListener('change', () => setMenuOpen(false, false));
+        setMenuOpen(false, false);
+
         // --- 1. DYNAMIC BACKGROUND WAVEFORM ---
         const canvas = document.getElementById('wave-canvas');
         const ctx = canvas.getContext('2d');
         
         function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
         }
         window.addEventListener('resize', resize);
         resize();
@@ -890,7 +1090,17 @@
             }, 30);
         }
 
-        window.addEventListener('scroll', () => {
+        // Match the CSS layout so mobile steps never depend on scrolling to reveal them.
+        const staticSequence = window.matchMedia('(max-width: 768px), (max-height: 600px)');
+
+        function updateSequence() {
+            if (staticSequence.matches) {
+                if (typeInterval) clearInterval(typeInterval);
+                typedOutput.textContent = fullText.trim();
+                displayFrame.style.removeProperty('transform');
+                return;
+            }
+
             // Calculate how far down the sequence container we have scrolled
             const rect = sequenceContainer.getBoundingClientRect();
             
@@ -933,7 +1143,11 @@
                 if (index === activeIndex) dot.classList.add('active');
                 else dot.classList.remove('active');
             });
-        });
+        }
+
+        window.addEventListener('scroll', updateSequence, { passive: true });
+        window.addEventListener('resize', updateSequence);
+        updateSequence();
 
         
     </script>

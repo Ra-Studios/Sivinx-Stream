@@ -1,22 +1,52 @@
-# Sivinx-Stream
+# Sivinx Stream
 
-App Live Link to Download :- https://ra-studios.github.io/Sivinx-Stream/
+**[Visit the website](https://ra-studios.github.io/Sivinx-Stream/)** · **[Download for Windows (v0.1.0)](https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe)**
 
-Sivinx Stream is a lightweight, lightning-fast application designed to instantly transcribe your voice anywhere on your computer using advanced AI models.
+Sivinx Stream is a desktop voice transcription application for Windows. Hold a hotkey, speak, and release the keys to insert the transcription into the text field you are using.
+
+The website includes a video demonstration, setup guide, frequently asked questions, and privacy information. You can browse it on a phone, tablet, or computer; the application itself runs on Windows.
 
 ## Features
-- **Push-to-Talk:** Simply hold down `Ctrl + Alt` to start speaking, and release to instantly paste the text into whatever window you have open.
-- **Deepgram & Gemini Integration:** Powered by the fastest and most accurate AI transcription models available.
-- **Offline Mode:** Includes built-in, local transcription models so you can transcribe your voice even without an internet connection.
-- **Always on Top:** Sits quietly in the corner of your screen, ready whenever you need it.
 
-## How to Install
-1. Go to the [Releases page](https://github.com/RaStudios/sivinx-stream/releases).
-2. Download the `Sivinx Stream Setup.exe` file.
-3. Double-click the downloaded file and follow the installation wizard.
+- **Push-to-talk:** Hold `Ctrl + Alt` to record and release to transcribe into your active text field.
+- **Cloud transcription:** Choose Deepgram or Google Gemini in Settings. Cloud engines require an internet connection and your own provider API key.
+- **Offline mode:** Use local Whisper.cpp models to transcribe without sending audio to a cloud provider.
+- **Customizable hotkey:** Choose a key combination that suits your workflow in Settings.
+- **Desktop integration:** Access Settings from the application's system tray icon.
 
-## How to Use
-1. Open the application.
-2. Go to the Settings page to select your preferred AI model (Deepgram, Gemini, or Offline).
-3. Click into any text box on your computer (like a Word document, browser, or chat).
-4. Hold down `Ctrl + Alt` on your keyboard, speak your thought, and release the keys. The text will instantly appear where your cursor is!
+## Install on Windows
+
+1. Download [Sivinx Stream Setup.exe](https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe).
+2. Run the installer and follow the setup wizard.
+3. Open Sivinx Stream and configure your microphone and transcription engine in Settings.
+4. For a cloud engine, enter your own provider API key. For offline transcription, complete the local model setup in the application.
+
+The current application supports **Windows 10 and Windows 11**. See the [website](https://ra-studios.github.io/Sivinx-Stream/) for the full user guide.
+
+## Use Sivinx Stream
+
+1. Click inside a text field, such as a document, chat, email draft, or browser search box.
+2. Press and hold `Ctrl + Alt` (or your configured hotkey).
+3. Speak while holding the keys.
+4. Release the keys to transcribe and insert your words at the cursor.
+
+To switch engines or change the hotkey, open Settings from the system tray icon.
+
+## Website files
+
+This repository hosts the product website on GitHub Pages and distributes the Windows installer through GitHub Releases.
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Website content, responsive styles, and interactive demonstrations |
+| `logo.png` | Product logo |
+| `video_compressed.mp4` | Application demonstration video |
+
+The website is a static page with no build step. To preview changes locally, open `index.html` in a browser or serve the repository with a local static web server. Keep the existing release URLs, section anchors, and asset paths intact when editing the page.
+
+## More information
+
+- [Website and download page](https://ra-studios.github.io/Sivinx-Stream/)
+- [Existing releases reference](https://github.com/RaStudios/sivinx-stream/releases)
+
+Created by **RaStudios**.
