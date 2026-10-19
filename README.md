@@ -1,9 +1,5 @@
 # Sivinx Stream
 
-**[Visit the website](https://ra-studios.github.io/Sivinx-Stream/)** · **[Download for Windows (v0.1.0)](https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe)**
-
-# Sivinx Stream
-
 Voice typing for Windows. Speak into documents, messages, emails, and other editable text fields using a keyboard shortcut or the floating recording widget.
 
 [Download for Windows](https://github.com/Ra-Studios/Sivinx-Stream/releases/latest/download/Sivinx.Stream.Setup.exe) · [Website & demonstration](https://ra-studios.github.io/Sivinx-Stream/) · [All releases](https://github.com/Ra-Studios/Sivinx-Stream/releases)
@@ -102,6 +98,6 @@ The website can be viewed on phones, tablets, and computers. The desktop applica
 ## More information
 
 - [Website and download page](https://ra-studios.github.io/Sivinx-Stream/)
-- [Existing releases reference](https://github.com/RaStudios/sivinx-stream/releases)
+- [Existing releases reference](https://github.com/ra-Studios/sivinx-stream/releases)
 
 Created by **RaStudios**.
