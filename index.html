@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sivinx Stream | Professional Voice Transcription</title>
+    <title>Sivinx Stream | Voice Typing for Windows</title>
+    <meta name="description" content="Voice typing for Windows with keyboard and mouse recording, local English transcription, cloud providers, personal vocabulary, and optional text history.">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -17,8 +20,6 @@
             --text-secondary: #888888;
             --text-tertiary: #444444;
             --accent: #ffffff;
-            --page-gutter: clamp(1rem, 4vw, 4rem);
-            --nav-height: 96px;
         }
 
         * {
@@ -38,16 +39,6 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: calc(var(--nav-height) + 1rem);
-        }
-
-        img, video {
-            max-width: 100%;
-        }
-
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--text-primary);
-            outline-offset: 5px;
         }
 
         ::selection {
@@ -75,7 +66,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem var(--page-gutter);
+            padding: 1.5rem 4rem;
             z-index: 100;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
             backdrop-filter: blur(10px);
@@ -87,7 +78,6 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            flex-shrink: 0;
         }
 
         .nav-brand img {
@@ -132,11 +122,6 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: transform 0.2s ease, background-color 0.2s ease;
-            white-space: nowrap;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .nav-btn:hover {
@@ -144,33 +129,14 @@
             background: #e0e0e0;
         }
 
-        .nav-panel { display: contents; }
-        .nav-toggle, .drawer-header, .menu-backdrop { display: none; }
-
-        .menu-button {
-            width: 44px;
-            height: 44px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background: var(--surface-color);
-            color: var(--text-primary);
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .menu-button svg { width: 22px; height: 22px; }
-
         /* HERO SECTION */
         .hero {
             position: relative;
             min-height: 100vh;
-            min-height: 100svh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: calc(var(--nav-height) + 3rem) var(--page-gutter) 4rem;
+            padding: 0 4rem;
             z-index: 10;
         }
 
@@ -179,7 +145,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
             opacity: 0.4;
         }
@@ -233,7 +199,6 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            padding-top: var(--nav-height);
         }
 
         .step-indicator {
@@ -284,7 +249,6 @@
         .display-frame {
             width: 60vw;
             height: 60vh;
-            min-height: 440px;
             background: var(--surface-color);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -371,7 +335,7 @@
         }
         .equalizer-bar {
             width: 8px;
-            background: #ff3333;
+            background: #eeeeee;
             border-radius: 4px;
             animation: eq-bounce 1s ease-in-out infinite alternate;
         }
@@ -384,8 +348,8 @@
         .equalizer-bar:nth-child(7) { height: 70px; animation-delay: 0.1s; }
         
         @keyframes eq-bounce {
-            0% { transform: scaleY(0.3); background: #990000; }
-            100% { transform: scaleY(1); background: #ff3333; box-shadow: 0 0 20px rgba(255, 51, 51, 0.8); }
+            0% { transform: scaleY(0.3); opacity: 0.45; }
+            100% { transform: scaleY(1); opacity: 1; }
         }
         .layer-listening h2 { font-size: 2.5rem; }
 
@@ -412,7 +376,7 @@
 
         /* GRID FEATURES SECTION */
         .grid-section {
-            padding: 10rem var(--page-gutter);
+            padding: 10rem 4rem;
             background: var(--bg-color);
             position: relative;
         }
@@ -428,7 +392,7 @@
 
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
@@ -475,7 +439,7 @@
 
         /* LONG FORM CONTENT & FAQ */
         .long-form-section {
-            padding: 8rem var(--page-gutter);
+            padding: 8rem 4rem;
             max-width: 1000px;
             margin: 0 auto;
             border-top: 1px solid var(--border-color);
@@ -487,7 +451,7 @@
         .long-form-section li { margin-bottom: 0.5rem; }
         
         .faq-section {
-            padding: 8rem var(--page-gutter);
+            padding: 8rem 4rem;
             max-width: 1000px;
             margin: 0 auto;
             border-top: 1px solid var(--border-color);
@@ -504,7 +468,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
         }
         .faq-answer {
             max-height: 0;
@@ -523,7 +486,6 @@
             font-weight: 300;
             transition: transform 0.3s ease;
             color: var(--text-tertiary);
-            flex-shrink: 0;
         }
         .faq-item.open .faq-toggle-icon {
             transform: rotate(45deg);
@@ -532,7 +494,7 @@
 
         /* CTA SECTION */
         .cta-section {
-            padding: 10rem var(--page-gutter);
+            padding: 10rem 4rem;
             text-align: center;
             border-top: 1px solid var(--border-color);
             background: radial-gradient(circle at 50% 100%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,1) 50%);
@@ -557,7 +519,6 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            max-width: 100%;
         }
 
         .btn-massive::after {
@@ -583,19 +544,157 @@
 
         /* FOOTER */
         footer {
-            padding: 3rem var(--page-gutter);
+            padding: 3rem 4rem;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             color: var(--text-tertiary);
             font-size: 0.9rem;
-            gap: 1rem;
-            flex-wrap: wrap;
         }
 
-        /* VIDEO DEMONSTRATION */
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-item.large { grid-column: span 1; }
+            .display-frame { width: 90vw; }
+            .step-indicator { display: none; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav { padding: 1.5rem 2rem; }
+            .hero, .grid-section, .cta-section { padding: 4rem 2rem; }
+        }
+    
+        
+        
+        
+
+        :root { --text-secondary: #aeaeae; --text-tertiary: #8c8c8c; }
+        body { line-height: 1.6; }
+        :where(a, summary, button):focus-visible { outline: 2px solid #fff; outline-offset: 5px; border-radius: 3px; }
+        .skip-link { position: fixed; left: 1rem; top: -6rem; z-index: 200; background: #fff; color: #000; padding: .7rem 1rem; }
+        .skip-link:focus { top: 1rem; }
+        section[id], main[id] { scroll-margin-top: 110px; }
+        .hero { padding-top: 8rem; padding-bottom: 4rem; min-height: 100svh; }
+        .hero p { max-width: 630px; }
+        .bento-item p { line-height: 1.75; }
+        .grid-header { margin-bottom: 3rem; }
+        .grid-header h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+        .long-form-section, .faq-section { padding: 6rem clamp(1.25rem, 5vw, 4rem); }
+        .long-form-section h2, .faq-section h2 { font-size: clamp(2rem, 4.5vw, 3rem); }
+        .long-form-section h3 { font-size: clamp(1.25rem, 3vw, 1.6rem); line-height: 1.3; }
+        .long-form-section p, .long-form-section li { overflow-wrap: anywhere; }
+        .long-form-section a { color: #fff; text-underline-offset: 4px; }
+        .section-label { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .12em; font-size: .75rem !important; margin-bottom: 1.25rem !important; }
+        kbd { font-family: 'JetBrains Mono', monospace; color: #f5f5f5; background: #171717; border: 1px solid #444; border-radius: 4px; padding: .15em .4em; white-space: nowrap; font-size: .9em; }
+        .faq-item { padding: 1.5rem 0; cursor: auto; }
+        .faq-question { cursor: pointer; list-style: none; gap: 1.5rem; line-height: 1.4; font-size: clamp(1.05rem, 2.5vw, 1.35rem); }
+        .faq-question::-webkit-details-marker, .legal-document summary::-webkit-details-marker { display: none; }
+        .faq-answer { max-height: none; overflow: visible; font-size: 1rem; }
+        .faq-item[open] .faq-answer { margin-top: 1rem; }
+        .faq-toggle-icon { flex-shrink: 0; transition: transform 200ms ease, color 200ms ease; }
+        .faq-item[open] .faq-toggle-icon { transform: rotate(45deg); color: #fff; }
+        .legal-document { border: 1px solid #343434; border-radius: 8px; margin: 1rem 0; background: #0a0a0a; }
+        .legal-document summary { display: flex; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; padding: 1.2rem 1.5rem; font-size: 1.1rem; font-weight: 600; }
+        .legal-document summary span { transition: transform 200ms ease; }
+        .legal-document[open] summary span { transform: rotate(45deg); }
+        .legal-document[open] summary { border-bottom: 1px solid #343434; }
+        .legal-document-body { padding: 1.5rem; }
+        .legal-document-body p { font-size: 1rem; margin-bottom: 1rem; }
+        .legal-document-body h3 { margin: 2rem 0 .75rem; font-size: 1.2rem; }
+        .policy-date { font-family: 'JetBrains Mono', monospace; font-size: .75rem !important; }
+        .policy-section { scroll-margin-top: 110px; }
+        #interactive-demo { padding: 5rem clamp(1.25rem, 5vw, 4rem); }
+        #interactive-demo h2 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.2; }
+        .btn-massive { max-width: 100%; font-size: clamp(1rem, 2.5vw, 1.5rem); padding: 1.25rem clamp(1.25rem, 5vw, 4rem); transition: transform 200ms ease, box-shadow 200ms ease; }
+        .btn-massive:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,255,255,.12); }
+        .btn-massive::after { display: none; }
+        @media (max-width: 960px) {
+            nav { padding: .85rem 1.25rem; flex-wrap: wrap; gap: .65rem 1rem; background: rgba(0,0,0,.92); }
+            .nav-brand { gap: .55rem; }
+            .nav-brand img { width: 30px; height: 30px; }
+            .nav-brand span { font-size: .9rem; }
+            .nav-btn { padding: .6rem 1rem; font-size: .8rem; }
+            .nav-links { position: static; transform: none; order: 3; width: 100%; gap: 1.5rem; justify-content: center; }
+            .nav-link { font-size: .85rem; }
+            .hero { padding: 9rem 1.25rem 4rem; }
+            .hero h1 { font-size: clamp(2.7rem, 9vw, 5rem); }
+            .hero p { font-size: 1.1rem; }
+            .grid-section { padding: 4rem 1.25rem; }
+            .bento-item { padding: 1.75rem; }
+            .cta-section { padding: 5rem 1.25rem; }
+            .cta-section h2 { font-size: clamp(2.5rem, 8vw, 4rem); }
+            footer { padding: 2rem 1.25rem; flex-wrap: wrap; gap: .75rem; }
+        }
+        @media (max-width: 600px) {
+            .display-frame { width: calc(100vw - 2.5rem); height: 430px; }
+            .frame-body, .content-layer { padding: 1.5rem; }
+            .content-layer h2 { font-size: 1.9rem; }
+            .content-layer p { font-size: 1rem; }
+            .key { padding: .8rem 1.2rem; }
+            .typewriter-text { font-size: 1.35rem; padding-left: 1rem; }
+            .legal-document summary, .legal-document-body { padding: 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .sequence-container { height: auto; }
+            .sticky-wrapper { position: relative; height: auto; padding: 3rem 0; }
+            .display-frame { height: auto; transform: none !important; }
+            .frame-body { padding: 0; overflow: visible; }
+            .content-layer { position: relative; inset: auto; opacity: 1; visibility: visible; transform: none; padding: 2rem; }
+            .step-indicator { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <nav aria-label="Main navigation">
+        <div class="nav-brand">
+            <!-- Ensure logo.png is in the same folder -->
+            <img src="logo.png" alt="Sivinx Logo" onerror="this.style.display='none'">
+            <span>SIVINX STREAM</span>
+        </div>
+        <div class="nav-links">
+            <a href="#how-to-use" class="nav-link">Guide</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#legal" class="nav-link">Privacy</a>
+        </div>
+        <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/latest/download/Sivinx.Stream.Setup.exe" class="nav-btn">Download</a>
+    </nav>
+
+    <main id="main-content">
+    <!-- HERO WITH CANVAS BACKGROUND -->
+    <section class="hero">
+        <canvas id="wave-canvas" aria-hidden="true"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">Voice typing for Windows</div>
+            <h1>Transcribe at<br>the Speed of<br>Thought.</h1>
+            <p>Hold a shortcut or click the microphone. Speak naturally, then finish to turn your words into text in the field you are using.</p>
+        </div>
+    </section>
+
+    
+    
+    <!-- VIDEO DEMONSTRATION SECTION -->
+    <section class="video-section" id="interactive-demo">
+        <div class="video-container">
+            <h2>See Sivinx Stream in Action</h2>
+            <div class="video-wrapper">
+                <!-- Replace video_compressed.mp4 in this folder to update the demonstration. -->
+                <video id="sivinx-demo-video" controls autoplay muted loop playsinline preload="metadata" aria-label="Sivinx Stream application demonstration">
+                    <source src="video_compressed.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+    
+    <style>
         .video-section {
-            padding: 8rem var(--page-gutter);
+            padding: 8rem 4rem;
             background: var(--bg-color);
             display: flex;
             justify-content: center;
@@ -604,7 +703,6 @@
         .video-container {
             width: 100%;
             max-width: 800px;
-            min-width: 0;
             text-align: center;
         }
         .video-container h2 {
@@ -625,178 +723,7 @@
             height: auto;
             display: block;
         }
-
-        /* RESPONSIVE: keep navigation in normal flow before it can overlap. */
-        @media (max-width: 1200px) {
-            .nav-links { position: static; transform: none; gap: 1.5rem; }
-            nav { gap: 1.5rem; }
-        }
-        @media (max-width: 1024px) {
-            .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .bento-item { padding: 2rem; }
-            .display-frame { width: calc(100% - 2 * var(--page-gutter)); }
-            .step-indicator { display: none; }
-        }
-        @media (max-width: 768px) {
-            :root { --nav-height: 72px; }
-            nav {
-                gap: 1rem;
-                padding: 0.75rem var(--page-gutter);
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-            }
-            .nav-brand { gap: 0.5rem; }
-            .nav-brand img { width: 30px; height: 30px; }
-            .nav-brand span { font-size: clamp(0.95rem, 3.5vw, 1.1rem); }
-            .nav-toggle { display: inline-flex; }
-            .nav-panel {
-                display: flex;
-                flex-direction: column;
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: min(360px, calc(100% - 3rem));
-                height: 100vh;
-                height: 100dvh;
-                padding: 1.25rem;
-                padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
-                gap: 2rem;
-                background: #0a0a0a;
-                border-left: 1px solid #333;
-                box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
-                z-index: 101;
-                overflow-y: auto;
-                overscroll-behavior: contain;
-                transform: translateX(100%);
-                visibility: hidden;
-                transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.35s;
-            }
-            .drawer-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
-            .drawer-title { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; }
-            .nav-close { display: inline-flex; }
-            .nav-links { flex-direction: column; align-items: stretch; gap: 0.5rem; }
-            .nav-link { display: flex; align-items: center; min-height: 52px; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); }
-            .nav-btn { margin-top: auto; min-height: 52px; }
-            .menu-backdrop {
-                display: block;
-                position: fixed;
-                inset: 0;
-                z-index: 99;
-                border: 0;
-                background: rgba(0, 0, 0, 0.65);
-                opacity: 0;
-                visibility: hidden;
-                cursor: pointer;
-                transition: opacity 0.35s ease, visibility 0s linear 0.35s;
-            }
-            body.menu-open { overflow: hidden; }
-            .menu-open .nav-panel { transform: translateX(0); visibility: visible; transition-delay: 0s; }
-            .menu-open .menu-backdrop { opacity: 1; visibility: visible; transition-delay: 0s; }
-            .menu-open .nav-toggle { visibility: hidden; }
-            .hero { padding-top: calc(var(--nav-height) + 3rem); padding-bottom: 3rem; }
-            .hero h1 { font-size: clamp(2rem, 9.2vw, 4rem); }
-            .hero p { font-size: 1.1rem; }
-            .hero-badge { font-size: 0.65rem; letter-spacing: 0.06em; margin-bottom: 1.5rem; }
-            .grid-section, .cta-section, .video-section, .long-form-section, .faq-section { padding: 4rem var(--page-gutter); }
-            .grid-header { margin-bottom: 2rem; }
-            .grid-header h2, .cta-section h2 { font-size: clamp(2rem, 8vw, 3.5rem); }
-            .video-container h2, .long-form-section h2, .faq-section h2 { font-size: clamp(1.8rem, 6.5vw, 2.75rem); margin-bottom: 2rem; }
-            .bento-grid { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-            .bento-item.large { grid-column: span 1; }
-            .bento-item { padding: 1.5rem; }
-            .bento-item h3, .long-form-section h3 { font-size: 1.5rem; }
-            .bento-item p, .long-form-section p, .long-form-section li, .faq-answer { font-size: 1rem; }
-            .long-form-section ul, .long-form-section ol { padding-left: 1.25rem; }
-            .faq-question { font-size: 1.1rem; line-height: 1.5; }
-            .faq-item { padding: 1.5rem 0; }
-            .btn-massive { width: 100%; padding: 1.25rem 1rem; font-size: clamp(1rem, 3.5vw, 1.3rem); }
-            footer { padding: 2rem var(--page-gutter); flex-direction: column; }
-        }
-
-        /* Read all three steps normally on phones and short landscape screens. */
-        @media (max-width: 768px), (max-height: 600px) {
-            .sequence-container { height: auto; }
-            .sticky-wrapper { position: static; height: auto; padding: 3rem var(--page-gutter); overflow: visible; }
-            .step-indicator { display: none; }
-            .display-frame { width: 100%; max-width: 800px; height: auto; min-height: 0; transform: none; }
-            .frame-header { flex-shrink: 0; }
-            .frame-body { display: block; padding: 0; overflow: visible; }
-            .content-layer { position: relative; inset: auto; padding: 1.5rem; opacity: 1; visibility: visible; transform: none; transition: none; }
-            .content-layer + .content-layer { border-top: 1px solid var(--border-color); }
-            .layer-setup h2, .layer-listening h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
-            .layer-setup p, .layer-listening p, .layer-output p { font-size: 1rem; line-height: 1.6; }
-            .key-combo { margin-top: 1.5rem; flex-wrap: wrap; }
-            .key { padding: 0.75rem 1.25rem; font-size: 1rem; }
-            .typewriter-text { font-size: clamp(1.1rem, 4vw, 1.5rem); padding-left: 1rem; min-height: 0; }
-            .cursor { display: none; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .equalizer-bar, .cursor { animation: none; }
-            .nav-panel, .menu-backdrop { transition: none; }
-        }
-    
-        
-        
-        
     </style>
-</head>
-<body>
-
-    <button class="menu-backdrop" type="button" aria-label="Close navigation" tabindex="-1"></button>
-    <nav aria-label="Main navigation">
-        <div class="nav-brand">
-            <!-- Ensure logo.png is in the same folder -->
-            <img src="logo.png" alt="Sivinx Logo" onerror="this.style.display='none'">
-            <span>SIVINX STREAM</span>
-        </div>
-        <button class="menu-button nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-        <div class="nav-panel" id="mobile-menu">
-            <div class="drawer-header">
-                <span class="drawer-title">SIVINX STREAM</span>
-                <button class="menu-button nav-close" type="button" aria-label="Close navigation">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-                </button>
-            </div>
-            <div class="nav-links">
-                <a href="#how-to-use" class="nav-link">Guide</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#faq" class="nav-link">FAQ</a>
-                <a href="#legal" class="nav-link">Privacy</a>
-            </div>
-            <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe" class="nav-btn">Download</a>
-        </div>
-    </nav>
-
-    <!-- HERO WITH CANVAS BACKGROUND -->
-    <section class="hero">
-        <canvas id="wave-canvas"></canvas>
-        <div class="hero-content">
-            <div class="hero-badge">Zero Friction Audio Interface</div>
-            <h1>Transcribe at<br>the Speed of<br>Thought.</h1>
-            <p>A native, ultra-minimalist desktop application. Press your hotkey anywhere on your system and speak. Sivinx Stream types it instantly.</p>
-        </div>
-    </section>
-
-    
-    
-    <!-- VIDEO DEMONSTRATION SECTION -->
-    <section class="video-section" id="interactive-demo">
-        <div class="video-container">
-            <h2>See Sivinx Stream in Action</h2>
-            <div class="video-wrapper">
-                <!-- Replace 'your_video.mp4' with the actual path to your video file -->
-                <video id="sivinx-demo-video" controls autoplay muted loop playsinline>
-                    <source src="video_compressed.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </section>
     
     <!-- SCROLL DRIVEN SEQUENCE -->
     <section class="sequence-container" id="how-it-works">
@@ -820,7 +747,7 @@
                     <div class="content-layer layer-setup active" id="layer-1">
                         <p class="mono">Step 01</p>
                         <h2>Global Hotkey Activation</h2>
-                        <p>No window switching required. Works natively over any application on Windows.</p>
+                        <p>Focus an editable text field, hold your shortcut, and speak. You can also record with the floating microphone.</p>
                         <div class="key-combo">
                             <div class="key">CTRL</div>
                             <div class="key">ALT</div>
@@ -839,7 +766,7 @@
                             <div class="equalizer-bar"></div>
                         </div>
                         <h2>Listening...</h2>
-                        <p class="mono">Engine: Deepgram Nova-2 / Gemini Pro</p>
+                        <p class="mono">Illustrative preview · Your selected provider</p>
                     </div>
 
                     <!-- Layer 3 -->
@@ -858,298 +785,218 @@
     <!-- BENTO GRID FEATURES -->
     <section class="grid-section">
         <div class="grid-header">
-            <h2>System<br>Architecture</h2>
+            <h2>Made for<br>everyday writing.</h2>
         </div>
         <div class="bento-grid">
             <div class="bento-item large">
-                <h3>Absolute Privacy. Offline Mode.</h3>
-                <p>Sivinx Stream comes bundled with local Whisper.cpp models. When offline mode is enabled, your audio data never leaves your hardware. Pure, uncompromised privacy.</p>
+                <h3>Your choice of processing.</h3>
+                <p>Use the included English speech model on your computer, or connect a supported cloud provider with your own API key. For fully offline dictation, disable live cloud processing and cloud formatting too.</p>
                 <svg class="bento-pattern" width="200" height="200" viewBox="0 0 100 100"><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/></pattern><rect width="100" height="100" fill="url(#grid)"/></svg>
             </div>
             <div class="bento-item">
-                <h3>Native Desktop Integration</h3>
-                <p>Built on Tauri and Rust. Consumes almost zero RAM while idling in your system tray.</p>
+                <h3>A widget that stays close.</h3>
+                <p>Record with your keyboard or mouse. Dock the widget at the bottom or either side of your screen; your placement is remembered for next time.</p>
             </div>
             <div class="bento-item">
-                <h3>Push-to-Talk Logic</h3>
-                <p>Hold the keys to record. Release to stop and type. It perfectly matches human intuition.</p>
+                <h3>Words that sound like you.</h3>
+                <p>Add preferred spellings to Vocabulary and choose writing preferences for your workflow. Formatting capabilities depend on your selected model and provider.</p>
             </div>
             <div class="bento-item large">
-                <h3>Hyper-Accurate AI Engines</h3>
-                <p>When connected, it leverages Deepgram and Google Gemini models to automatically punctuate, format, and perfectly understand complex terminology without hesitation.</p>
+                <h3>See it. Review it. Keep it.</h3>
+                <p>Transcript preview shows words as your model returns them. Find your latest result in Home, or enable encrypted text history with a retention period you choose.</p>
             </div>
         </div>
     </section>
 
     <!-- COMPREHENSIVE GUIDE SECTION -->
     <section class="long-form-section" id="how-to-use">
-        <h2>Complete User Guide</h2>
-        <p>Sivinx Stream was designed with one singular goal: to remove the friction between human thought and digital text. We believe you should not have to context-switch, open a new application, or fumble with complex microphone settings just to transcribe your voice. Here is a comprehensive guide on exactly how to use the software to its maximum potential.</p>
-        
-        <h3>1. Initial Setup & Installation</h3>
-        <p>After downloading the `.exe` installer from our official releases page, simply run the setup wizard. Sivinx Stream installs natively on your Windows machine in seconds. Once installed, it will automatically launch and place a sleek, unobtrusive icon in your System Tray (the bottom right corner of your Windows taskbar, near the clock).</p>
-        
-        <h3>2. The Settings Dashboard</h3>
-        <p>You can right-click the Sivinx Stream icon in your system tray at any time to open the Settings dashboard. This is where you configure the brain of the application. We offer three distinct engines depending on your needs:</p>
+        <p class="section-label">Getting started</p>
+        <h2>From voice to text.</h2>
+        <p>Choose where your words should go, start recording, and finish when you are ready. You can use a keyboard shortcut or the floating microphone.</p>
+        <h3>1. Install and choose your microphone</h3>
+        <p>Download the Windows installer using either Download button on this page. Run the setup wizard, review the terms, and choose an installation folder. Open Sivinx Stream after setup. The installer includes an English speech model for local recognition.</p>
+        <p>Hover over the widget and choose Settings, or right-click the app's system tray icon and select Settings. In Preferences, choose your microphone, check Windows microphone permission, and use the recording test if needed.</p>
+        <h3>2. Choose where processing happens</h3>
+        <p>Advanced settings separates speech recognition from text formatting. Cloud features require internet access and your own provider credentials; provider charges and limits may apply.</p>
         <ul>
-            <li><strong>Deepgram Nova-2 (Cloud):</strong> The absolute bleeding edge of speed. Recommended for users with an active internet connection who want near-instantaneous transcription with exceptional punctuation and formatting.</li>
-            <li><strong>Google Gemini (Cloud):</strong> The ultimate model for contextual understanding. Gemini excels at transcribing complex, multi-lingual, or highly technical jargon.</li>
-            <li><strong>Whisper.cpp (Offline/Local):</strong> For absolute, uncompromised privacy. This model downloads directly to your hard drive and runs entirely on your local CPU/GPU. No audio data ever leaves your computer. Perfect for sensitive documents, medical records, or working on an airplane with no Wi-Fi.</li>
+            <li><strong>Dictation:</strong> Use the local English model, or configure a supported cloud transcription provider and model.</li>
+            <li><strong>Live Typing:</strong> Configure Deepgram or Google Gemini for supported live recognition. Language and preview behavior depend on the selected model.</li>
+            <li><strong>Formatting:</strong> Optionally send the transcript to a text provider for supported writing adjustments. This can send text to the cloud even when speech recognition is local.</li>
         </ul>
-
-        <h3>3. The Push-to-Talk Philosophy</h3>
-        <p>Unlike other transcription software that forces you to click a "Record" button and then click a "Stop" button, Sivinx Stream acts like a walkie-talkie. We use a global hotkey interceptor running at the operating system level.</p>
+        <p><strong>To stay fully offline:</strong> select local recognition, disable the live provider, and disable cloud formatting. The included local model supports English; selecting a different language does not add that language to this model.</p>
+        <h3>3. Record with your keyboard or mouse</h3>
         <ol>
-            <li>Click into ANY text field on your computer (a Microsoft Word document, a Discord chat, a web browser search bar, or an email draft).</li>
-            <li>Press and <strong>hold down</strong> `CTRL + ALT` on your keyboard.</li>
-            <li>While holding the keys, speak your thought naturally.</li>
-            <li><strong>Release the keys.</strong></li>
+            <li>Click inside an editable text field in a document, message, email, or browser.</li>
+            <li>Hold <kbd>Ctrl + Alt</kbd>, or your configured shortcut, and speak.</li>
+            <li>Release the keys to finish. Keep the destination window selected while processing completes.</li>
+            <li>Review the inserted text, especially names, numbers, and important wording.</li>
         </ol>
-        <p>The moment you release the keys, Sivinx Stream instantly processes the audio buffer, queries the selected AI engine, and securely injects the perfectly punctuated text directly into wherever your typing cursor was located. It feels like magic.</p>
+        <p><strong>Prefer the mouse?</strong> Hover over the widget and click the microphone. Choose the check mark to <strong>Finish &amp; Paste</strong>, or the cross to <strong>Cancel</strong>. These controls appear for mouse recording; keyboard recording finishes when you release the shortcut.</p>
+        <h3>4. Make the app fit your workflow</h3>
+        <p>Preferences includes supported shortcut choices, microphone controls, recording sounds, transcript preview, writing modes, and application profiles. Profiles apply writing preferences; they do not start recordings. Vocabulary lets you add preferred spellings and common corrections.</p>
+        <p>Home shows your latest result. History is off by default; enable it if you want encrypted text history on this Windows account, with a retention period of 1, 7, or 30 days.</p>
+        <h3>5. Recover a result or check a recording</h3>
+        <p>If automatic insertion is blocked, click the destination text field and press <kbd>Ctrl + V</kbd>, or copy the latest result from Home. If you see <strong>No sound detected</strong>, check the selected input, run the microphone test, and check Windows permissions. Review Advanced settings for cloud connection problems.</p>
+        <h3>6. Keep up to date</h3>
+        <p>Version 0.1.1 configures signed updates for future releases. On startup, the app checks its GitHub release feed when internet access is available. A newer release can offer <strong>Update Now</strong> or <strong>Later</strong>. Users upgrading from 0.1.0 should install 0.1.1 or a newer release manually once.</p>
     </section>
 
     <!-- ABOUT SECTION -->
     <section class="long-form-section" id="about">
-        <h2>About RaStudios</h2>
-        <p>RaStudios is a forward-thinking software collective dedicated to building tools that augment human capability. We look at the modern desktop experience and see unnecessary friction. Why should a user type at 60 words per minute when they can speak at 150?</p>
-        <p>We built Sivinx Stream because we were dissatisfied with the existing solutions on the market. They were either too slow, required a monthly subscription for basic features, or forced you to copy and paste text from a clunky web interface. We wanted something that lived invisibly on the desktop, consumed almost zero RAM, and integrated seamlessly with the operating system.</p>
-        <p>Our philosophy is rooted in minimalism, privacy, and speed. We believe software should get out of your way and let you focus entirely on your ideas.</p>
+        <p class="section-label">About RaStudios</p>
+        <h2>Less friction.<br>More room to think.</h2>
+        <p>Sivinx Stream brings voice input into the Windows applications you already use. Start from a shortcut or a small desktop widget, choose how your speech is processed, and review your words where you work.</p>
+        <p>RaStudios focuses on practical controls and clear choices: local or cloud recognition, optional formatting, personal vocabulary, and history you choose to enable. Recognition accuracy and processing time depend on your microphone, computer, provider, model, and connection.</p>
     </section>
 
     <!-- FAQ SECTION -->
     <section class="faq-section" id="faq">
-        <h2>Frequently Asked Questions</h2>
-        
-        <div class="faq-item" onclick="this.classList.toggle('open')">
-            <div class="faq-question">Do I need an internet connection to use Sivinx Stream? <span class="faq-toggle-icon">+</span></div>
-            <div class="faq-answer">No. While the Deepgram and Gemini engines require an internet connection for cloud processing, Sivinx Stream comes with a fully functional Offline Mode powered by Whisper.cpp. You can transcribe infinitely with zero internet connection.</div>
-        </div>
-        
-        <div class="faq-item" onclick="this.classList.toggle('open')">
-            <div class="faq-question">Does this work on Mac or Linux? <span class="faq-toggle-icon">+</span></div>
-            <div class="faq-answer">Currently, Sivinx Stream is optimized specifically for Windows architectures (Windows 10 and 11) to ensure the deepest possible integration with the OS input layer. Cross-platform support is currently on our roadmap.</div>
-        </div>
-
-        <div class="faq-item" onclick="this.classList.toggle('open')">
-            <div class="faq-question">Is there a subscription fee? <span class="faq-toggle-icon">+</span></div>
-            <div class="faq-answer">No. Sivinx Stream operates on a Bring-Your-Own-Key (BYOK) model for cloud services, and the offline local models are 100% free forever. We do not charge recurring subscriptions.</div>
-        </div>
-
-        <div class="faq-item" onclick="this.classList.toggle('open')">
-            <div class="faq-question">Can I change the CTRL + ALT hotkey? <span class="faq-toggle-icon">+</span></div>
-            <div class="faq-answer">Yes, the hotkey is fully customizable within the Settings dashboard. You can bind it to any key combination that fits your personal workflow.</div>
-        </div>
+        <p class="section-label">A few useful answers</p>
+        <h2>Before you begin.</h2>
+        <details class="faq-item"><summary class="faq-question">Can I use Sivinx Stream without internet?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">Yes. Use the included English model for local recognition, disable the live provider, and disable cloud formatting. Cloud transcription and formatting require an internet connection. The startup update check also needs internet access, but offline recognition does not.</div></details>
+        <details class="faq-item"><summary class="faq-question">Can I record without holding a shortcut?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">Yes. Hover over the widget and click its microphone. Choose Finish &amp; Paste to complete the recording, or Cancel to discard it. With keyboard recording, release the held shortcut to finish.</div></details>
+        <details class="faq-item"><summary class="faq-question">Which languages are supported?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">The included offline model supports English. Cloud language support varies by provider and model. You can add preferred languages, including Urdu, in Settings; a language selection does not make an unsupported model multilingual.</div></details>
+        <details class="faq-item"><summary class="faq-question">Do I need an API key, and are there provider charges?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">The included offline model needs no provider API key. Cloud features use your own provider account and credentials. Your provider may charge for usage, limit free access, or restrict particular models. Review its pricing and terms before connecting.</div></details>
+        <details class="faq-item"><summary class="faq-question">Are my API keys included in the installer?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">No. Saved API keys are stored in Windows Credential Manager on your computer, not copied into the distributed installer. They authenticate requests to the selected provider. Other users enter their own credentials.</div></details>
+        <details class="faq-item"><summary class="faq-question">Can I change Ctrl + Alt?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">Yes. Choose from the supported shortcut combinations in Preferences. The app offers a restricted set of combinations to reduce accidental typing and conflicts with normal keyboard use.</div></details>
+        <details class="faq-item"><summary class="faq-question">Why do some models show text only after I finish?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">Transcript preview displays words when your selected provider returns them. Supported live routes can return partial text while you speak; other models return a result after recording ends. Enable Transcript preview in Preferences to see available text.</div></details>
+        <details class="faq-item"><summary class="faq-question">What if text does not appear in my application?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">Keep an editable field focused while recording and processing. Some applications and Windows permission levels can block insertion. Select the destination and press Ctrl + V, or copy the latest result from Home. Important text should be reviewed before sending.</div></details>
+        <details class="faq-item"><summary class="faq-question">Does the app run on phones, Mac, or Linux?<span class="faq-toggle-icon" aria-hidden="true">+</span></summary><div class="faq-answer">The desktop application currently supports 64-bit Windows 10 and Windows 11. This website can be viewed on a phone, tablet, or computer. No release date is announced here for other desktop platforms.</div></details>
     </section>
 
     <!-- LEGAL & PRIVACY SECTION -->
     <section class="long-form-section" id="legal">
-        <h2>Privacy Policy</h2>
-        <p>At RaStudios, privacy is not an afterthought; it is a fundamental architectural requirement. Because Sivinx Stream processes human voice recordings, we have structured the application to give you total control over your data.</p>
-        <ul>
-            <li><strong>Local Processing (Offline Mode):</strong> When using the offline Whisper models, your audio data is processed entirely within your computer's RAM. It is never saved to your hard drive, and it is never transmitted over the internet.</li>
-            <li><strong>Cloud Processing:</strong> When utilizing Deepgram or Google Gemini, your audio buffer is securely transmitted to their respective API endpoints via encrypted TLS connections. We do not proxy, store, or log these requests on any RaStudios servers. The transaction is strictly between your machine and the AI provider.</li>
-            <li><strong>Telemetry:</strong> Sivinx Stream does not contain tracking pixels, analytics SDKs, or background telemetry. We do not know when you use the app, how often you use it, or what you say.</li>
-        </ul>
-
-        <h3>Terms and Conditions</h3>
-        <p>By downloading and utilizing Sivinx Stream, you agree to use the software in compliance with all local laws and regulations. RaStudios provides this software "as is" without warranties of any kind, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
-        <p>In no event shall RaStudios be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort arising in any way out of the use of this software.</p>
-        <p>Users are responsible for ensuring that their use of third-party APIs (such as Deepgram or Google Gemini) complies with the respective Terms of Service of those providers.</p>
+        <p class="section-label">Your data &amp; your choices</p>
+        <h2>Privacy &amp; terms.</h2>
+        <p>Local recognition, cloud recognition, and cloud formatting handle different information. Read the application policy and terms below to understand those choices.</p>
+        <details class="legal-document"><summary>Privacy Policy <span aria-hidden="true">+</span></summary><div class="legal-document-body"><p class="policy-date">Effective 19 October 2026 · Applies to the installed Windows application.</p>
+    
+    <p class="ss-info-lead">The information processed by Sivinx Stream depends on the features and providers you enable. Local recognition, cloud recognition, and cloud formatting handle different information. This policy explains those differences and the controls available to you.</p>
+    <section class="policy-section"><h3>Microphone and recordings</h3><p>The application captures audio when you start a recording or run a microphone test. Between sessions, microphone capture is paused. Recording audio is held in application memory rather than saved as a routine audio archive.</p><p>A failed recording may remain in memory for retry for up to approximately 30 minutes, or until the app exits. The local microphone playback test does not send its test recording to an AI provider.</p></section>
+    <section class="policy-section"><h3>Local and cloud processing</h3><p>With local recognition selected, speech is transcribed on your computer. Fully local dictation also requires disabling live providers and cloud formatting.</p><p>Cloud audio and live providers receive audio needed for transcription. If cloud formatting is enabled, the selected text provider receives the transcript and relevant instructions, including supported vocabulary hints, even when recognition runs locally. Requests also disclose connection information, such as your IP address, to the receiving service.</p><p>Providers operate under their own terms and privacy policies, including rules on retention, training, service locations, and subprocessors. Review the policies for your selected provider and model; Sivinx Stream does not control their practices.</p></section>
+    <section class="policy-section"><h3>Latest result, history, and clipboard</h3><p>Your latest completed transcript remains in memory and is available in Home until you clear it or exit the application. Completed dictation is also copied to the Windows clipboard to support pasting.</p><p>Text history is off by default. When enabled, it stores up to 100 entries on this device, including the text, time, writing mode, destination application name, and recording duration. Choose a retention period of 1, 7, or 30 days in History. Expired entries are removed during the app’s history cleanup.</p><p>Saved history is encrypted using Windows account protection. Delete individual entries, clear history, or turn history off to remove saved entries. These actions do not clear the Windows clipboard, Windows clipboard history or sync, text pasted elsewhere, backups, or copies held by a provider.</p></section>
+    <section class="policy-section"><h3>Settings and credentials</h3><p>Preferences, vocabulary, and application profiles are stored on this device. The app identifies the destination application to apply your configured profile and label saved history.</p><p>New API keys are saved in Windows Credential Manager and authenticate requests to the corresponding provider. Older installations may retain legacy credentials if migration cannot complete. Protect access to your Windows account and revoke a key with its provider if you believe it has been exposed.</p></section>
+    <section class="policy-section"><h3>Diagnostics, updates, and support</h3><p>Routine application diagnostics record operational details such as timings and errors rather than transcript contents. On startup, the app checks its configured GitHub release endpoint for updates. That request exposes normal connection information to the release host; it does not include your recording or transcript. Installation is offered when an update is available.</p><p>Information you choose to send to support, including messages, screenshots, or logs, is received through the email or messaging service you use. Share only what is needed and remove secrets before sending. Opening a website, support channel, or donation link uses an external service with its own privacy policy. This policy does not describe those services.</p></section>
+    <section class="policy-section"><h3>Your controls and security</h3><p>You can change providers, disable cloud formatting, revoke microphone permission in Windows, disable or delete history, clear the latest result, and manage provider keys. Exiting the app clears its in-memory recordings and latest transcript; closing only Settings does not exit the app.</p><p>Windows credential storage and history encryption reduce exposure but cannot guarantee security against a compromised device or account. Contact RaStudios using the link below for privacy questions or requests concerning information you shared with us. Information held by an AI provider must also be addressed with that provider.</p></section>
+    <section class="policy-section"><h3>Policy updates</h3><p>This policy may change as the application’s features or data practices change. The effective date above identifies this version. Review the updated policy when you install an update.</p></section></div></details>
+        <details class="legal-document"><summary>Terms &amp; Conditions <span aria-hidden="true">+</span></summary><div class="legal-document-body"><p class="policy-date">Effective 19 October 2026 · Provided by RaStudios.</p>
+    
+    <p class="ss-info-lead">These terms govern your use of the Sivinx Stream desktop application. Read them together with the Privacy Policy and the terms of third-party services you connect. If you do not agree, discontinue use of the application.</p>
+    <section class="policy-section"><h3>Permitted use</h3><p>You may use Sivinx Stream for lawful personal and professional dictation, subject to these terms and applicable third-party licenses. You are responsible for permission to record and process the speech or information you provide, including consent required when recording other people.</p><p>Do not use the application to infringe another person’s rights, misuse credentials, bypass service restrictions, or violate applicable law.</p></section>
+    <section class="policy-section"><h3>Providers, accounts, and charges</h3><p>Cloud features require an account and valid credentials with your chosen provider. You are responsible for your account, permitted model use, usage limits, and any charges. A model described as free may still have restrictions or availability limits.</p><p>Provider pricing, access, models, and policies may change independently of Sivinx Stream. Connecting a provider does not make RaStudios responsible for its service or create an endorsement by that provider.</p></section>
+    <section class="policy-section"><h3>Reviewing generated text</h3><p>Speech recognition and text refinement can omit words, mishear names or numbers, or change meaning. Review the result before sending, publishing, or relying on it, especially in sensitive or consequential communications.</p><p>Accuracy, response time, automatic insertion, and compatibility with every application are not guaranteed. Keep independent copies of important work; clipboard contents, in-memory recovery, and optional history are not a backup service.</p></section>
+    <section class="policy-section"><h3>Your content and privacy</h3><p>These terms do not transfer ownership of your dictated content to RaStudios. Processing depends on your selected settings, as described in the Privacy Policy. Third-party providers may impose additional conditions on content submitted to them.</p><p>You are responsible for choosing a processing route appropriate for the information you dictate and your workplace or organizational policies.</p></section>
+    <section class="policy-section"><h3>Software and third-party materials</h3><p>Sivinx Stream branding and original application materials belong to their respective rights holders. Open-source components, fonts, and model weights remain subject to their own licenses. These terms do not restrict rights granted under those licenses.</p><p>Updates may change functionality or compatibility. Cloud features also depend on network access and the availability of external services.</p></section>
+    <section class="policy-section"><h3>Warranties and responsibility</h3><p>To the extent permitted by applicable law, the application is provided “as is” and “as available,” without promises of uninterrupted operation, error-free results, or fitness for a particular purpose.</p><p>To the extent permitted by applicable law, RaStudios is not responsible for indirect or consequential loss arising from use of the application, including losses caused by inaccurate output, interrupted services, or unavailable data. Nothing in these terms excludes liability that cannot legally be excluded or limits mandatory consumer rights.</p></section>
+    <section class="policy-section"><h3>Stopping use and changes to these terms</h3><p>You can stop using and uninstall the application at any time. Clear saved history through the app before uninstalling if you want to remove those records. Saved credentials can be managed in Windows Credential Manager; revoke keys through the corresponding provider to stop further use. Uninstalling does not revoke provider credentials, delete provider-held data, or clear text pasted into other applications.</p><p>Revised terms will carry an updated effective date. Review them with application updates and discontinue use if you do not accept the revised terms. Contact RaStudios using the link below for questions.</p></section></div></details>
+        <h3>Visiting this website</h3>
+        <p>This static website is hosted on GitHub Pages and loads typefaces from Google Fonts. Requests to those services disclose normal connection information. GitHub states that Pages visitors' IP addresses are logged for security purposes. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub Pages data collection</a> and <a href="https://fonts.google.com/faq">Google Fonts information</a> for details. The demonstration video is served from this website's files; the website does not record your microphone.</p>
+        <p>Questions about the application or these documents? Contact <a href="mailto:ratheradilhassan@gmail.com">RaStudios</a>.</p>
     </section>
 
     <!-- CTA -->
     <section class="cta-section">
         <h2>Ready to<br>upgrade your<br>workflow?</h2>
-        <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/download/v0.1.0/Sivinx.Stream.Setup.exe" class="btn-massive">Download for Windows</a>
+        <a href="https://github.com/Ra-Studios/Sivinx-Stream/releases/latest/download/Sivinx.Stream.Setup.exe" class="btn-massive">Download for Windows</a>
     </section>
 
+    </main>
     <footer>
         <div>&copy; 2026 RaStudios. All rights reserved.</div>
-        <div>System Version 0.1.0</div>
+        <div>Windows 10 / 11 · 64-bit</div>
     </footer>
 
     <!-- SCRIPTS -->
     <script>
-        // Mobile drawer: keyboard focus stays inside until the menu closes.
-        const mobileNavigation = window.matchMedia('(max-width: 768px)');
-        const menuToggle = document.querySelector('.nav-toggle');
-        const menuPanel = document.querySelector('.nav-panel');
-        const menuClose = document.querySelector('.nav-close');
-        const menuBackdrop = document.querySelector('.menu-backdrop');
-        const pageSections = document.querySelectorAll('body > section, body > footer');
-
-        function setMenuOpen(open, restoreFocus = true) {
-            open = open && mobileNavigation.matches;
-            document.body.classList.toggle('menu-open', open);
-            menuToggle.setAttribute('aria-expanded', String(open));
-            menuPanel.inert = mobileNavigation.matches && !open;
-            pageSections.forEach(section => { section.inert = open; });
-            if (open) menuClose.focus({ preventScroll: true });
-            else if (restoreFocus && mobileNavigation.matches) menuToggle.focus({ preventScroll: true });
-        }
-
-        menuToggle.addEventListener('click', () => setMenuOpen(true));
-        menuClose.addEventListener('click', () => setMenuOpen(false));
-        menuBackdrop.addEventListener('click', () => setMenuOpen(false));
-        menuPanel.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => setMenuOpen(false));
-        });
-        document.addEventListener('keydown', event => {
-            if (!document.body.classList.contains('menu-open')) return;
-            if (event.key === 'Escape') {
-                event.preventDefault();
-                setMenuOpen(false);
-            } else if (event.key === 'Tab') {
-                const controls = [...menuPanel.querySelectorAll('button, a[href]')];
-                const first = controls[0];
-                const last = controls[controls.length - 1];
-                if (event.shiftKey && document.activeElement === first) {
-                    event.preventDefault();
-                    last.focus();
-                } else if (!event.shiftKey && document.activeElement === last) {
-                    event.preventDefault();
-                    first.focus();
-                }
-            }
-        });
-        mobileNavigation.addEventListener('change', () => setMenuOpen(false, false));
-        setMenuOpen(false, false);
-
-        // --- 1. DYNAMIC BACKGROUND WAVEFORM ---
+        const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
         const canvas = document.getElementById('wave-canvas');
         const ctx = canvas.getContext('2d');
-        
-        function resize() {
-            canvas.width = canvas.clientWidth;
-            canvas.height = canvas.clientHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
+        let waveFrame = 0;
         let time = 0;
-        function drawWave() {
-            ctx.fillStyle = '#000000';
+        function paintWave() {
+            if (!ctx) return;
+            ctx.fillStyle = '#000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
             ctx.lineWidth = 2;
-            
-            // Draw multiple overlapping sine waves to look like audio
-            for(let i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 ctx.beginPath();
-                // A very soft, elegant gradient-like opacity
-                ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 + (i * 0.08)})`;
-                
-                for(let x = 0; x < canvas.width; x += 5) {
-                    // Extremely smooth, slow rolling waves
-                    const y = canvas.height / 2 
-                            + Math.sin(x * 0.005 + time + i) * 60 
-                            + Math.sin(x * 0.002 - time * 0.3) * 100 * (i * 0.1 + 0.5);
-                    
-                    if(x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
+                ctx.strokeStyle = 'rgba(255,255,255,' + (0.1 + i * 0.08) + ')';
+                for (let x = 0; x < canvas.width; x += 5) {
+                    const y = canvas.height / 2 + Math.sin(x * 0.005 + time + i) * 60 + Math.sin(x * 0.002 - time * 0.3) * 100 * (i * 0.1 + 0.5);
+                    if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
                 }
                 ctx.stroke();
             }
-            // Much slower time increment for professional fluid feel
-            time += 0.003;
-            requestAnimationFrame(drawWave);
         }
-        drawWave();
-
-
-        // --- 2. SCROLL DRIVEN SEQUENCE ANIMATION ---
+        function drawWave() {
+            waveFrame = 0;
+            paintWave();
+            if (!motionPreference.matches && !document.hidden && ctx) {
+                time += 0.003;
+                waveFrame = requestAnimationFrame(drawWave);
+            }
+        }
+        function resizeWave() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            paintWave();
+        }
         const sequenceContainer = document.querySelector('.sequence-container');
-        const layers = [
-            document.getElementById('layer-1'),
-            document.getElementById('layer-2'),
-            document.getElementById('layer-3')
-        ];
-        const dots = [
-            document.getElementById('dot-1'),
-            document.getElementById('dot-2'),
-            document.getElementById('dot-3')
-        ];
+        const layers = [1, 2, 3].map(n => document.getElementById('layer-' + n));
+        const dots = [1, 2, 3].map(n => document.getElementById('dot-' + n));
         const displayFrame = document.getElementById('display-frame');
-        
-        // Typewriter effect variables
         const typedOutput = document.getElementById('typed-output');
-        const fullText = " This is a demonstration of Sivinx Stream transcribing audio into text instantly upon releasing the hotkey.";
+        const fullText = 'Speak naturally. Finish your recording, review the result, and keep writing in the application you are using.';
         let typeInterval = null;
-
+        function stopTyping() { clearInterval(typeInterval); typeInterval = null; }
         function runTypewriter() {
-            if(typeInterval) clearInterval(typeInterval);
-            typedOutput.textContent = "";
+            stopTyping();
+            if (motionPreference.matches || document.hidden) { typedOutput.textContent = fullText; return; }
+            typedOutput.textContent = '';
             let i = 0;
             typeInterval = setInterval(() => {
-                if(i < fullText.length) {
-                    typedOutput.textContent += fullText.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typeInterval);
-                }
+                if (i < fullText.length) typedOutput.textContent += fullText.charAt(i++);
+                else stopTyping();
             }, 30);
         }
-
-        // Match the CSS layout so mobile steps never depend on scrolling to reveal them.
-        const staticSequence = window.matchMedia('(max-width: 768px), (max-height: 600px)');
-
         function updateSequence() {
-            if (staticSequence.matches) {
-                if (typeInterval) clearInterval(typeInterval);
-                typedOutput.textContent = fullText.trim();
-                displayFrame.style.removeProperty('transform');
-                return;
+            if (motionPreference.matches) {
+                stopTyping(); typedOutput.textContent = fullText; displayFrame.style.transform = 'none'; return;
             }
-
-            // Calculate how far down the sequence container we have scrolled
             const rect = sequenceContainer.getBoundingClientRect();
-            
-            // Scroll progress between 0 and 1
-            let progress = 0;
-            if (rect.top < 0) {
-                progress = Math.abs(rect.top) / (rect.height - window.innerHeight);
-            }
-            if (rect.top > 0) progress = 0;
-            if (rect.bottom < window.innerHeight) progress = 1;
-
-            // Determine which layer should be active based on progress (3 layers)
-            let activeIndex = 0;
-            if (progress > 0.33) activeIndex = 1;
-            if (progress > 0.66) activeIndex = 2;
-
-            // Frame 3D rotation effect based on scroll
-            const rotateX = (progress - 0.5) * 20; // -10deg to 10deg
-            displayFrame.style.transform = `perspective(1000px) rotateX(${rotateX}deg)`;
-
-            // Update UI
+            const travel = Math.max(1, rect.height - window.innerHeight);
+            const progress = Math.max(0, Math.min(1, -rect.top / travel));
+            const active = progress > 0.66 ? 2 : progress > 0.33 ? 1 : 0;
+            displayFrame.style.transform = 'perspective(1000px) rotateX(' + ((progress - 0.5) * 20) + 'deg)';
             layers.forEach((layer, index) => {
-                if (index === activeIndex) {
-                    if(!layer.classList.contains('active')) {
-                        layer.classList.add('active');
-                        // Trigger typing effect only when entering layer 3
-                        if(index === 2) {
-                            runTypewriter();
-                        } else {
-                            if(typeInterval) clearInterval(typeInterval);
-                            typedOutput.textContent = "";
-                        }
-                    }
-                } else {
-                    layer.classList.remove('active');
+                const entered = index === active && !layer.classList.contains('active');
+                layer.classList.toggle('active', index === active);
+                if (entered) {
+                    if (index === 2) runTypewriter();
+                    else { stopTyping(); typedOutput.textContent = ''; }
                 }
             });
-
-            dots.forEach((dot, index) => {
-                if (index === activeIndex) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
+            dots.forEach((dot, index) => dot.classList.toggle('active', index === active));
         }
-
-        window.addEventListener('scroll', updateSequence, { passive: true });
-        window.addEventListener('resize', updateSequence);
-        updateSequence();
-
-        
+        let sequenceFrame = 0;
+        function scheduleSequence() {
+            if (sequenceFrame) return;
+            sequenceFrame = requestAnimationFrame(() => { sequenceFrame = 0; updateSequence(); });
+        }
+        function syncMotion() {
+            cancelAnimationFrame(waveFrame); waveFrame = 0;
+            if (document.hidden) { stopTyping(); if (layers[2].classList.contains('active')) typedOutput.textContent = fullText; }
+            drawWave(); updateSequence();
+            if (motionPreference.matches) {
+                const video = document.getElementById('sivinx-demo-video');
+                video.autoplay = false; video.pause();
+            }
+        }
+        window.addEventListener('resize', () => { resizeWave(); scheduleSequence(); });
+        window.addEventListener('scroll', scheduleSequence, { passive: true });
+        document.addEventListener('visibilitychange', syncMotion);
+        motionPreference.addEventListener('change', syncMotion);
+        resizeWave(); syncMotion();
     </script>
 </body>
 </html>
